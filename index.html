@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Exametry 0.01 — AI-powered study management platform for CUET, NEET, JEE, 12th Boards, CET and more.">
+    <title>Exametry — AI Study Platform</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="design-system.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        /* Inline critical styles for faster first paint */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="sample-data.js"></script>
+    <script src="storage.js"></script>
+    <script src="settings.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="analysis.js"></script>
+    <script src="analytics.js"></script>
+    <script src="audio.js"></script>
+    <script src="ui.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="tictactoe.js"></script>
+    <script src="spekle.js"></script>
+    <script src="rudius.js"></script>
+    <script src="app.js"></script>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Ex</div>
+            <div>
+                <div class="sidebar-brand">Exametry</div>
+            </div>
+            <span class="sidebar-version">v0.01β</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-title">Main</div>
+            <div class="nav-item active" data-page="dashboard" onclick="App.navigate('dashboard')" role="button"
+                tabindex="0" aria-label="Dashboard">
+                <span class="nav-item-icon">📊</span>
+                <span class="nav-item-label">Dashboard</span>
+            </div>
+            <div class="nav-item" data-page="analysis" onclick="App.navigate('analysis')" role="button" tabindex="0"
+                aria-label="Analysis Mode">
+                <span class="nav-item-icon">📝</span>
+                <span class="nav-item-label">Analysis Mode</span>
+            </div>
+
+            <div class="nav-section-title">AI Tools</div>
+            <div class="nav-item" data-page="rudius" onclick="App.navigate('rudius')" role="button" tabindex="0"
+                aria-label="Rudius AI Mentor">
+                <span class="nav-item-icon">🤖</span>
+                <span class="nav-item-label">Rudius 3.z</span>
+            </div>
+            <div class="nav-item" data-page="spekle" onclick="App.navigate('spekle')" role="button" tabindex="0"
+                aria-label="Spekle Practice Suite">
+                <span class="nav-item-icon">⚡</span>
+                <span class="nav-item-label">Spekle</span>
+            </div>
+
+            <div class="nav-section-title">Extras</div>
+            <div class="nav-item" data-page="tictactoe" onclick="App.navigate('tictactoe')" role="button" tabindex="0"
+                aria-label="Tic Tac Toe">
+                <span class="nav-item-icon">🎮</span>
+                <span class="nav-item-label">Tic Tac Toe</span>
+            </div>
+
+            <div class="nav-section-title">Account</div>
+            <div class="nav-item" data-page="settings" onclick="App.navigate('settings')" role="button" tabindex="0"
+                aria-label="Settings">
+                <span class="nav-item-icon">⚙️</span>
+                <span class="nav-item-label">Settings</span>
+            </div>
+            <div class="nav-item" onclick="App.logout()" role="button" tabindex="0" aria-label="Log out"
+                style="color: var(--danger-400);">
+                <span class="nav-item-icon">🚪</span>
+                <span class="nav-item-label">Log Out</span>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="sidebar-collapse-btn" onclick="UI.toggleSidebar()" aria-label="Toggle sidebar">
+                <span>◀</span>
+                <span class="nav-item-label">Collapse</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="UI.closeMobileMenu()"></div>
+
+    <!-- Main wrapper -->
+    <div class="main-wrapper">
+        <!-- Topbar -->
+        <header class="topbar" role="banner">
+            <div class="topbar-left">
+                <button class="mobile-menu-btn" onclick="UI.toggleMobileMenu()" aria-label="Open menu">☰</button>
+                <div class="topbar-breadcrumb" id="breadcrumb">
+                    <span>Dashboard</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="topbar-action" id="theme-toggle" onclick="UI.toggleTheme()" aria-label="Toggle theme"
+                    data-tooltip="Toggle theme">
+                    🌙
+                </button>
+                <button class="topbar-action" aria-label="Notifications" data-tooltip="Notifications">
+                    🔔
+                    <span class="badge" style="display:none;"></span>
+                </button>
+                <div class="topbar-avatar" onclick="App.navigate('settings')" data-tooltip="Profile & Settings">
+                    <span id="topbar-avatar-text">?</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="app-content" role="main">
+            <!-- Page content loaded dynamically by SPA router -->
+            <div style="display:flex; align-items:center; justify-content:center; height:60vh;">
+                <div class="spinner lg"></div>
+            </div>
+        </main>
+
+        <!-- Creator Credits Footer -->
+        <footer class="creator-section" id="creator-footer">
+            <div class="creator-bg"></div>
+            <div class="creator-particles">
+                <div class="particle" style="top:20%;left:10%;animation-delay:0s;"></div>
+                <div class="particle" style="top:60%;left:80%;animation-delay:1s;"></div>
+                <div class="particle" style="top:30%;left:60%;animation-delay:2s;"></div>
+                <div class="particle" style="top:70%;left:30%;animation-delay:0.5s;"></div>
+                <div class="particle" style="top:40%;left:90%;animation-delay:1.5s;"></div>
+                <div class="particle" style="top:80%;left:50%;animation-delay:2.5s;"></div>
+            </div>
+            <div class="creator-content">
+                <div class="creator-badge">✨ Crafted with passion</div>
+                <h2 class="creator-name">Rihan Mirza</h2>
+                <p class="creator-email">
+                    <a href="mailto:mirzarihan112@gmail.com"
+                        style="color: var(--text-secondary); transition: color 0.3s;">
+                        mirzarihan112@gmail.com
+                    </a>
+                </p>
+                <p style="margin-top: var(--space-4); font-size: 0.8rem; color: var(--text-tertiary);">
+                    Exametry 0.01 (Beta) — Built for Indian exam warriors 🇮🇳
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container" role="alert" aria-live="polite"></div>
+
+    <!-- JS Modules (order matters) -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/data/sample-data.js"></script>
+    <script src="js/pages/auth.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+    <script src="js/pages/analysis.js"></script>
+    <script src="js/pages/rudius.js"></script>
+    <script src="js/pages/spekle.js"></script>
+    <script src="js/pages/tictactoe.js"></script>
+    <script src="js/pages/settings.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Show body once loaded
+        window.addEventListener('load', () => document.body.classList.add('loaded'));
+        // Keyboard navigation for sidebar
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                UI.closeModal();
+                UI.closeMobileMenu();
+            }
+        });
+    </script>
+</body>
+
+</html>
