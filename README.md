@@ -1,0 +1,2 @@
+# EXAMETRY-0.01
+EXAMETRY 0.01 beta
